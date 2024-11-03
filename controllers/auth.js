@@ -1,48 +1,56 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { httpError, controlWrapper } from "../helpers";
-import { User } from "../models";
+import helpers from "../helpers/index.js";
+import models from "../models/index.js";
+import JWTHandling from "../helpers/JWTHandling.js";
 const { SECRET_KEY } = process.env;
 
 const register = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = User.findOne({ email });
+  const user = await models.User.findOne({ email });
 
   if (user) {
-    throw httpError(409, "Email in use");
+    console.log(user.email);
+    throw helpers.httpError(409, "Email in use");
   }
 
   const hashPass = await bcrypt.hash(password, 10);
 
-  const newUser = await User.create({
+  const newUser = await models.User.create({
     ...req.body,
     password: hashPass,
   });
+  const verificationToken = JWTHandling.signToken(newUser._id);
+
+  newUser.token = verificationToken;
+  await newUser.save();
+  console.log(newUser);
 
   res.status(201).json({
     user: {
-      email,
+      email: newUser.email,
     },
+    token: newUser.token,
   });
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await models.User.findOne({ email });
   const comparePass = await bcrypt.compare(password, user.password);
 
   if (!user || !comparePass) {
-    throw httpError(401, "Email or password is wrong");
+    throw helpers.httpError(401, "Email or password is wrong");
   }
 
   const payload = {
     id: user._id,
   };
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+  const token = JWTHandling.signToken(payload.id);
 
-  await User.findByIdAndUpdate(user._id, { token });
+  await models.User.findByIdAndUpdate(user._id, { token });
 
   res.status(201).json({
     token,
@@ -53,15 +61,16 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
   const { _id } = req.user;
 
-  await User.findByIdAndUpdate(_id, { token: null });
+  await models.User.findByIdAndUpdate(_id, { token: null });
 
   res.status(204).json({
     message: "No content",
   });
 };
 
-export default auth = {
-  register: controlWrapper(register),
-  login: controlWrapper(login),
-  logout: controlWrapper(logout),
+const auth = {
+  register: helpers.controlWrapper(register),
+  login: helpers.controlWrapper(login),
+  logout: helpers.controlWrapper(logout),
 };
+export default auth;

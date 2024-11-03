@@ -1,0 +1,35 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"version": "2.0.1",
+		"title": "Water track API docs - OpenAPI 3.0",
+		"description": "**Функціональні можливості**: Реєстрація та авторизація користувачів; Редагування профайлу користувача, в тому числі аватару; Редагування денної норми споживання води; Додавання, редагування та видалення порцій спожитої води; Календар спожитих порцій та статистика в розрізі місяця.",
+		"consumes": ["application/json", "multipart/form-data"],
+		"produces": ["application/json"]
+	},
+	"servers": [
+		{ "url": "https://water-tracker-backend-ob6w.onrender.com/" },
+		{ "url": "http://localhost:3000" }
+	],
+	"tags": [
+		{
+			"name": "Auth",
+			"description": "Authorization endpoints"
+		},
+		{
+			"name": "User",
+			"description": "User endpoints"
+		},
+		{
+			"name": "Water Track",
+			"description": "Water Track endpoints"
+		},
+		{
+			"name": "Water Rate",
+			"description": "Water Rate endpoints"
+		},
+		{
+			"name": "Calendar",
+			"description": "Calendar endpoints"
+		}
+	]}

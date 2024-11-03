@@ -1,9 +1,10 @@
-import authenticate from "./authenticate";
-import isValidId from "./isValidId";
-import validation from "./validation";
+import authenticate from "./authenticate.js";
+import isValidId from "./isValidId.js";
+import validation from "./validation.js";
 
-export default middlewares = {
+const middlewares = {
   authenticate,
   isValidId,
   validation,
 };
+export default middlewares;

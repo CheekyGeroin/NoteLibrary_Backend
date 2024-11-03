@@ -1,11 +1,18 @@
 import express from "express";
-import { authenticate, validation } from "../../middlewares";
-import { loginSchema } from "../../schemas";
+import middlewares from "../../middlewares/index.js";
+import schemes from "../../schemas/index.js";
+import auth from "../../controllers/auth.js";
 
 const router = express.Router();
 
-router.post("/register", validation(loginSchema));
+router.post(
+  "/register",
+  middlewares.validation(schemes.loginSchema),
+  auth.register
+);
 
-router.post("/login", validation(loginSchema));
+router.post("/login", middlewares.validation(schemes.loginSchema), auth.login);
 
-router.post("/logout", authenticate);
+router.post("/logout", middlewares.authenticate, auth.logout);
+
+export default router;

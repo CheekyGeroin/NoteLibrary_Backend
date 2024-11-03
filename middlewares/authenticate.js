@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models";
-import { httpError } from "../helpers";
+import models from "../models/index.js";
+import helpers from "../helpers/index.js";
+import JWTHandling from "../helpers/JWTHandling.js";
 
 const { SECRET_KEY } = process.env;
 
@@ -8,20 +9,23 @@ const authenticate = async (req, res, next) => {
   const { authorization = " " } = req.headers;
   const [bearer, token] = authorization.split(" ");
   if (bearer !== "Bearer") {
-    next(httpError(401));
+    next(helpers.httpError(401));
   }
-
+  console.log(token);
   try {
-    const { id } = jwt.verify(token, SECRET_KEY);
-    const user = await User.findById(id);
-
+    console.log(1);
+    const id = JWTHandling.checkToken(token);
+    console.log(id);
+    const user = await models.User.findById(id);
+    console.log(user);
     if (!user || !user.token || user.token !== token) {
-      next(httpError(401));
+      next(helpers.httpError(401));
     }
+
     req.user = user;
     next();
   } catch {
-    next(httpError(401));
+    next(helpers.httpError(401));
   }
 };
 

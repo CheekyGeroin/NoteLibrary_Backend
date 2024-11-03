@@ -1,9 +1,11 @@
-import httpError from "./httpErrors";
-import controlWrapper from "./controlWrapper";
-import handlerMongooseErrors from "./handlerMongooseErrors";
+import httpError from "./httpErrors.js";
+import controlWrapper from "./controlWrapper.js";
+import handlerMongooseErrors from "./handlerMongooseErrors.js";
 
-export default helpers = {
+const helpers = {
   httpError,
   controlWrapper,
   handlerMongooseErrors,
 };
+
+export default helpers;

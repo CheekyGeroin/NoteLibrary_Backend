@@ -1,5 +1,7 @@
-import User from "./userModel";
+import User from "./userModel.js";
 
-export default models = {
+const models = {
   User,
 };
+
+export default models;

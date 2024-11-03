@@ -1,10 +1,10 @@
-import { httpError } from "../helpers";
+import helpers from "../helpers/index.js";
 
 const validation = (schema, message) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
-      next(httpError(400, error.message));
+      next(helpers.httpError(400, error.message));
     }
     next();
   };

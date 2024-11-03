@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import app from "./app.js";
 
 dotenv.config();
 
@@ -8,7 +9,7 @@ mongoose.set("strictQuery", true);
 const port = PORT || 3000;
 
 const connection = () => {
-  return mongoose.connect(process.env.MONGO_CONNECTION_URL);
+  return mongoose.connect(process.env.MONGO_CONNECT_URL);
 };
 
 const startServer = async () => {

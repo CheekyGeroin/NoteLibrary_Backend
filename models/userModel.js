@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import helpers from "../helpers";
+import helpers from "../helpers/index.js";
 
 const emailRegexp = /^\w+([\.-]?w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 

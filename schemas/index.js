@@ -1,5 +1,7 @@
-import loginSchema from "./user";
+import loginSchema from "./user.js";
 
-export default schemes = {
+const schemes = {
   loginSchema,
 };
+
+export default schemes;

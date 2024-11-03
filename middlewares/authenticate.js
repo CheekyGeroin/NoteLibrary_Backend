@@ -4,7 +4,7 @@ import { httpError } from "../helpers";
 
 const { SECRET_KEY } = process.env;
 
-const auth = async (req, res, next) => {
+const authenticate = async (req, res, next) => {
   const { authorization = " " } = req.headers;
   const [bearer, token] = authorization.split(" ");
   if (bearer !== "Bearer") {
@@ -25,4 +25,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-export default auth;
+export default authenticate;

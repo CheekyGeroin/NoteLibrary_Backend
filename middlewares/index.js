@@ -1,9 +1,9 @@
-import auth from "./authenticate";
+import authenticate from "./authenticate";
 import isValidId from "./isValidId";
 import validation from "./validation";
 
 export default middlewares = {
-  auth,
+  authenticate,
   isValidId,
   validation,
 };

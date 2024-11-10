@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import helpers from "../helpers/index.js";
 import models from "../models/index.js";
 import JWTHandling from "../helpers/JWTHandling.js";

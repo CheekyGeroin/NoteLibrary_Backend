@@ -1,6 +1,6 @@
 import express from "express";
 import middlewares from "../../middlewares/index.js";
-import schemes from "../../schemas/index.js";
+import schemes from "../../schemes/index.js";
 import auth from "../../controllers/auth.js";
 
 const router = express.Router();

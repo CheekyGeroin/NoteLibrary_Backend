@@ -44,4 +44,8 @@ const updNoteScheme = Joi.object({
       "Body cannot have any properties other than title and text",
   });
 
-export default { addNoteScheme, updNoteScheme };
+const noteSchemes = {
+  addNoteScheme,
+  updNoteScheme,
+};
+export default noteSchemes;

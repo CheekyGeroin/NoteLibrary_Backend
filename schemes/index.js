@@ -1,10 +1,9 @@
 import loginScheme from "./user.js";
-import { addNoteScheme, updNoteScheme } from "./notes.js";
+import noteSchemes from "./notes.js";
 
 const schemes = {
   loginScheme,
-  addNoteScheme,
-  updNoteScheme,
+  ...noteSchemes,
 };
 
 export default schemes;

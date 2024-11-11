@@ -6,6 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import { createRequire } from "node:module";
 
 import authRouter from "./routes/auth/auth.js";
+import notesRouter from "./routes/notes/notes.js";
 
 const require = createRequire(import.meta.url);
 const swaggerDocument = require("./swagger.json");
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/api/auth", authRouter);
+app.use("/api/notes", notesRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Route not found" });

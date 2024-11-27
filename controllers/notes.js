@@ -13,7 +13,8 @@ const getNotes = async (req, res) => {
 
 const addNote = async (req, res) => {
   const { _id: owner } = req.user;
-  const newNote = await Note.create(...req.body, owner);
+  const { title, text } = req.body;
+  const newNote = await Note.create({ title, text, owner });
 
   res.status(201).json(newNote);
 };

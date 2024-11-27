@@ -7,11 +7,11 @@ const router = express.Router();
 
 router.post(
   "/register",
-  middlewares.validation(schemes.loginSchema),
+  middlewares.validation(schemes.loginScheme),
   auth.register
 );
 
-router.post("/login", middlewares.validation(schemes.loginSchema), auth.login);
+router.post("/login", middlewares.validation(schemes.loginScheme), auth.login);
 
 router.post("/logout", middlewares.authenticate, auth.logout);
 

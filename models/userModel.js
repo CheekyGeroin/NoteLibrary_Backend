@@ -4,6 +4,10 @@ import helpers from "../helpers/index.js";
 const emailRegexp = /^\w+([\.-]?w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const userSchema = new Schema({
+  username: {
+    type: String,
+    default: " ",
+  },
   email: {
     type: String,
     required: [true, "Email is required"],
